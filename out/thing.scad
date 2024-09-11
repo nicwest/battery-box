@@ -136,13 +136,13 @@ color ([0, 0, 1, ]) {
 }
 color ([1, 0, 0, ]) {
   difference () {
-    translate ([49/2, 19, 35]) {
+    translate ([49/2, 19, 75/2]) {
       difference () {
         minkowski () {
-          cube ([49, 38, 70], center=true);
+          cube ([49, 38, 75], center=true);
           sphere ($fn=30, r=6);
         }
-        cube ([49, 38, 70], center=true);
+        cube ([49, 38, 75], center=true);
       }
     }
     union () {
@@ -153,27 +153,30 @@ color ([1, 0, 0, ]) {
         cube ([55, 44, 206], center=true);
       }
     }
+    translate ([49/2, 0, -5]) {
+      cube ([10, 1000, 2], center=true);
+    }
   }
 }
 color ([1, 0, 0, ]) {
   translate ([0, 0, 40]) {
     difference () {
-      translate ([49/2, 19, 35]) {
+      translate ([49/2, 19, 75/2]) {
         difference () {
           minkowski () {
-            cube ([49, 38, 70], center=true);
+            cube ([49, 38, 75], center=true);
             sphere ($fn=30, r=6);
           }
-          cube ([49, 38, 70], center=true);
+          cube ([49, 38, 75], center=true);
         }
       }
       translate ([0, 0, -52]) {
         cube ([200, 200, 200], center=true);
       }
-      translate ([24.5, 19.0, -49.25]) {
+      translate ([24.5, 19.0, -49.15]) {
         difference () {
           cube ([300, 300, 200], center=true);
-          cube ([54.5, 43.5, 300], center=true);
+          cube ([54.7, 43.7, 300], center=true);
         }
       }
     }

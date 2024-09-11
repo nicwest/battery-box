@@ -27,7 +27,9 @@
    :tpu-layer-z 6
    :tpu-layer-offset-from-top-of-battery-z 17
    :box-outside-radius 6
-   :box-join-tol 0.25
+   :box-join-tol 0.15
+   :strap-cut-x 10
+   :strap-cut-z 2
    })
 
 (defn config
@@ -43,7 +45,7 @@
             :ys ys
             :box-x (+ (* xs (:box-battery-number-x opts)) (:box-battery-spacing opts))
             :box-y (+ (* ys (:box-battery-number-y opts)) (:box-battery-spacing opts))
-            :box-z (+ (:battery-body-z opts) (:battery-connector-z opts))
+            :box-z (+ (:battery-body-z opts) (:battery-connector-z opts) (:box-battery-spacing opts))
             :tpu-layer-offset-z (- (:battery-body-z opts)
                                    (:tpu-layer-offset-from-top-of-battery-z opts)
                                    (:tpu-layer-z opts))
@@ -101,7 +103,8 @@
 
 (defn box-bottom
   [{:keys [tpu-layer-offset-z tpu-layer-z
-           box-x box-y box-outside-radius] :as config}]
+           box-x box-y box-outside-radius
+           strap-cut-x strap-cut-z] :as config}]
   (let [d (/ box-outside-radius 2)
         xd (+ box-x d d)
         yd (+ box-y d d)
@@ -114,7 +117,10 @@
                    (cube 200 200 200))
 
         (translate [(- (/  xd 2) d) (- (/  yd 2) d) (+ 100 offset)]
-        (cube xd yd (+ 200 d d)))))))
+        (cube xd yd (+ 200 d d))))
+      (translate [(/ box-x 2) 0 (- (/ strap-cut-z 2) box-outside-radius)]
+                 (cube strap-cut-x 1000 strap-cut-z))
+      )))
 
 
 (defn box-top
@@ -151,6 +157,7 @@
    (color [1 0 0]
           (translate [0 0 40]
                      (box-top config)))])
+
 
 (render! "tpu-layer" (tpu-layer (config)))
 (render! "box-bottom" (box-bottom (config)))
