@@ -32,6 +32,7 @@
    :strap-cut-z 2
    })
 
+
 (defn config
   ([] (config {}))
   ([opts]
@@ -52,6 +53,35 @@
 
             ))))
 
+(def gbn-550-1s
+  (config))
+
+(def gbn-300-1s
+  (config {:battery-body-x 11.5
+           :battery-body-y 7.5
+           :battery-body-z 51
+           :box-battery-number-x 5
+           :box-battery-number-y 2
+           :box-battery-spacing 5
+           }))
+
+(def tattu-300-1s
+  (config {:battery-body-x 11.5
+           :battery-body-y 7.5
+           :battery-body-z 65
+           :box-battery-number-x 5
+           :box-battery-number-y 2
+           :box-battery-spacing 5
+           }))
+
+(def gbn-550-3s
+  (config {:battery-body-x 19
+           :battery-body-y 17.7
+           :battery-body-z 71
+           :box-battery-number-x 2
+           :box-battery-number-y 2
+           :box-battery-spacing 8
+           }))
 
 (defn battery
   [{:keys [battery-body-x battery-body-y battery-body-z
@@ -159,10 +189,10 @@
                      (box-top config)))])
 
 
-(render! "tpu-layer" (tpu-layer (config)))
-(render! "box-bottom" (box-bottom (config)))
-(render! "box-top" (box-top (config)))
-(render! "thing" (thing (config)))
+(render! "gbn-300-1s-tpu-layer" (tpu-layer gbn-300-1s))
+(render! "gbn-300-1s-box-bottom" (box-bottom gbn-300-1s))
+(render! "gbn-300-1s-box-top" (box-top gbn-300-1s))
+(render! "gbn-300-1s-thing" (thing gbn-300-1s))
 
 
 (defn -main
